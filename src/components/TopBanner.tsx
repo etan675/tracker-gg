@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
-import SiteLogo from './SiteLogo'
+import SiteLogo from './svg-components/SiteLogo'
 import classNames from 'classnames'
 
 type Props = Readonly<{ 
