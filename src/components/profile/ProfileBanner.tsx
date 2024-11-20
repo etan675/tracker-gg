@@ -21,8 +21,8 @@ const ProfileBanner = ({ summonerName, tag, level, profileIconId, rankedStats }:
     
     return (
         <div>
-            <Image 
-                src={`/lol-assets/12.6.1/img/profileicon/${profileIconId}.png`}
+            <Image
+                src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/${profileIconId}.jpg`}
                 alt='profile icon'
                 width={100}
                 height={100}

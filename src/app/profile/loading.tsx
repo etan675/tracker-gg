@@ -1,10 +1,6 @@
 import React from 'react';
 
-type Props = Readonly<{
-
-}>;
-
-const loading = ({}: Props) => {
+const loading = () => {
     return (
         <div>Loading...</div>
     )
