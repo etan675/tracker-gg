@@ -1,11 +1,13 @@
 import classNames from 'classnames';
-import React from 'react';
+import React, { ChangeEventHandler } from 'react';
 
 type Props = Readonly<{
     className?: string
+    value: string,
+    onChange: ChangeEventHandler<HTMLSelectElement>
 }>;
 
-const RegionSelect = ({ className }: Props) => {
+const RegionSelect = ({ className, value, onChange }: Props) => {
     return (
         <div className={classNames(
             'flex flex-col justify-center gap-1 pr-5',
@@ -20,11 +22,12 @@ const RegionSelect = ({ className }: Props) => {
             <select
                 className='bg-inherit cursor-pointer outline-none' 
                 id='mainSearchSelectRegion'
-                name='region'
+                value={value}
+                onChange={onChange}
             >
-                <option>OCE</option>
-                <option>NA</option>
-                <option>EUW</option>
+                <option value="OCE">OCE</option>
+                <option value="NA">NA</option>
+                <option value="EUW">EUW</option>
             </select>
         </div>
     )

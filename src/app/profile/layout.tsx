@@ -1,15 +1,19 @@
+import ProfileSearch from '@/components/profile-search/ProfileSearch';
 import React, { ReactNode } from 'react';
 
 type Props = Readonly<{
     children: ReactNode
 }>;
 
-const layout = ({ children }: Props) => {
+const Layout = ({ children }: Props) => {
     return (
-        <div>
+        <div className='flex flex-col h-full'>
+            <div className='w-full flex justify-center p-3 bg-[#5f9ea0]'>
+                <ProfileSearch />
+            </div>
             {children}
         </div>
     )
 };
 
-export default layout;
+export default Layout;

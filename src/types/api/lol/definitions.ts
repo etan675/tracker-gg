@@ -1,12 +1,5 @@
-export type playerSearchFields = {
-    region: string,
-    summonerName: string,
-    tag: string
-}
 
-// league api DTOs
-
-export type leagueEntryType = {
+export type LeagueEntryType = {
     summonerId: string,
     queueType: string,
     tier: string,
@@ -16,13 +9,13 @@ export type leagueEntryType = {
     losses: number
 }
 
-export type accountDataType = {
+export type AccountDataType = {
     puuid: string,
     gameName: string,
     tagLine: string
 }
 
-export type summonerDataType = {
+export type SummonerDataType = {
     id: string,
     puuid: string,
     profileIconId: number,

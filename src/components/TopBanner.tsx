@@ -1,7 +1,8 @@
-import Link from 'next/link'
 import React from 'react'
-import SiteLogo from './svg-components/SiteLogo'
+import Link from 'next/link'
 import classNames from 'classnames'
+import Image from 'next/image'
+import logo from '@/images/logo.png';
 
 type Props = Readonly<{ 
     className?: string 
@@ -10,12 +11,12 @@ type Props = Readonly<{
 const TopBanner = ({ className }: Props) => {
   return (
     <div className={classNames(
-        'w-full h-20 py-5 px-8 flex items-center',
+        'w-full h-20 py-5 px-8 flex items-center bg-[#7fffd4]',
         className
     )}>
         <Link className='flex items-center gap-2 h-full' href={'/'}>
-            <SiteLogo fill='white' width={30} height={30} />
-            <span className='text-3xl font-black'>Tracker.GG</span>
+            <Image className='rounded-md' src={logo} alt="app logo" width={40} height={40} priority />
+            <span className='text-3xl font-bold text-[#174a5f]'>Tracker.GG</span>
         </Link>
     </div>
   )
