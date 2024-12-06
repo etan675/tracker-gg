@@ -12,7 +12,7 @@ const ProfileNotFound = ({ summonerName, tag }: Props) => {
         <div className='flex justify-center items-center w-full h-full'>
             <p className='text-2xl'>
                 <span>Player </span>
-                <span className='font-bold'>"{searchedPlayerName}" </span>
+                <span className='font-bold'>&quot;{searchedPlayerName}&quot; </span>
                 <span>could not be found!</span>
             </p>
         </div>

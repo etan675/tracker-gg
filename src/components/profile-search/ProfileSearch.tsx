@@ -47,7 +47,7 @@ const ProfileSearch = ({ className }: Props) => {
         const summonerName = nameParts[0]?.trim() || '';
         const tag = nameParts[1]?.trim() || '';
 
-        let namePath = tag ? encodeNameSearchInUrl(summonerName, tag) : summonerName;
+        const namePath = tag ? encodeNameSearchInUrl(summonerName, tag) : summonerName;
 
         router.push(`/profile/${region}/${namePath}`)
     }
