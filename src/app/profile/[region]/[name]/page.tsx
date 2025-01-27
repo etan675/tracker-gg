@@ -38,15 +38,6 @@ const Page = async ({ params }: Props) => {
 
     const leagueData = await getLeagueData(summonerData.id);
 
-    if (!leagueData) {
-        return (
-            <ProfileNotFound 
-                summonerName={summonerName}
-                tag={tag}
-            />
-        );
-    }
-
     const _summonerName = accountData.gameName;
     const _tag = accountData.tagLine;
 
@@ -64,8 +55,8 @@ const Page = async ({ params }: Props) => {
     const losses = rankedSoloData?.losses || 0;
 
     return (
-        <>
-            <div className='w-screen bg-[#313132] py-10'>
+        <div className='flex flex-col h-full'>
+            <section className='w-screen bg-[#313132] py-10'>
                 <Content>
                     <ProfileBanner 
                         summonerName={_summonerName}
@@ -79,8 +70,8 @@ const Page = async ({ params }: Props) => {
                         losses={losses}
                     />
                 </Content>
-            </div>
-        </>
+            </section>
+        </div>
     );
 };
 

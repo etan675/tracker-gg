@@ -8,7 +8,7 @@ type Props = Readonly<{
 const Layout = ({ children }: Props) => {
     return (
         <div className='flex flex-col h-full'>
-            <div className='w-full flex justify-center p-3 bg-[#5f9ea0]'>
+            <div className='w-full flex justify-center p-3'>
                 <ProfileSearch />
             </div>
             {children}

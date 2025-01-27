@@ -20,9 +20,7 @@ type Props = Readonly<{
 
 const Layout = ({ children }: Props) => {
     return (
-        <div className='h-full'>
-            {children}
-        </div>
+        <>{children}</>
     )
 };
 

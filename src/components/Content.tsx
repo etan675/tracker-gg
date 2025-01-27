@@ -9,7 +9,7 @@ type Props = Readonly<{
 const Content = ({ className, children }: Props) => {
   return (
     <div className={classNames(
-        'w-[1140px] max-w-[80%] m-auto',
+        'w-[1140px] max-w-[80%] ml-auto mr-auto',
         className
     )}>
         {children}

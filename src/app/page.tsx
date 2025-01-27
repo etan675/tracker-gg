@@ -10,7 +10,7 @@ const Page = () => {
           Track your climb
         </div>
         <div className='text-xl text-[#AEAEAE] font-medium text-center'>
-          Tracker.GG provides you with the analytics that bring clarity to your ranked journey.
+          Tracker.GG brings you the clarity that you need for your ranked journey.
         </div>
         <ProfileSearch className='mt-3' />
       </div>

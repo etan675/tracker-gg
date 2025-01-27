@@ -18,9 +18,9 @@ export default function RootLayout({
       >
         <div className="flex flex-col w-full h-full ">
           <TopBanner />
-          <div className="flex-grow">
+          <main className="flex-grow">
             {children}
-          </div>
+          </main>
         </div>
       </body>
     </html>

@@ -7,6 +7,7 @@ type Props = Readonly<{
     onChange: ChangeEventHandler<HTMLSelectElement>
 }>;
 
+//TODO: use region filter in real query
 const RegionSelect = ({ className, value, onChange }: Props) => {
     return (
         <div className={classNames(

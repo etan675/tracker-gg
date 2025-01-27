@@ -36,6 +36,7 @@ const ProfileBanner = async ({
                     alt='profile icon'
                     width={100}
                     height={100}
+                    priority
                 />
                 <div className='absolute bottom-0 left-[50%] translate-x-[-50%] translate-y-[50%] px-1 bg-slate-800 rounded-md'>
                     {level}
