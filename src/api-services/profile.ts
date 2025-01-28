@@ -15,7 +15,7 @@ const getAccountData = async (summonerName: string, tag: string): Promise<Accoun
         return null;
     }
 
-    return res.json();
+    return await res.json();
 }
 
 const getSummonerData = async (puuid: string): Promise<SummonerDataType|null> => {
@@ -31,7 +31,7 @@ const getSummonerData = async (puuid: string): Promise<SummonerDataType|null> =>
         return null;
     }
 
-    return res.json();
+    return await res.json();
 }
 
 export {

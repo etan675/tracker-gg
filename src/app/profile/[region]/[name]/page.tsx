@@ -17,23 +17,13 @@ const Page = async ({ params }: Props) => {
     const accountData = await getAccountData(summonerName, tag);
 
     if (!accountData) {
-        return (
-            <ProfileNotFound 
-                summonerName={summonerName}
-                tag={tag}
-            />
-        );
+        return <ProfileNotFound summonerName={summonerName} tag={tag} />;
     }
 
     const summonerData = await getSummonerData(accountData.puuid);
 
     if (!summonerData) {
-        return (
-            <ProfileNotFound 
-                summonerName={summonerName}
-                tag={tag}
-            />
-        );
+        return <ProfileNotFound summonerName={summonerName} tag={tag} />;
     }
 
     const leagueData = await getLeagueData(summonerData.id);
@@ -45,14 +35,8 @@ const Page = async ({ params }: Props) => {
     const profileIconId = summonerData.profileIconId;
 
     const rankedSoloData = leagueData.find(entry => {
-        return entry.queueType === 'RANKED_SOLO_5x5';
+        return entry.queueType === RANKED_SOLO;
     });
-
-    const tier = rankedSoloData?.tier || '';
-    const rank = rankedSoloData?.rank || '';
-    const lp = rankedSoloData?.leaguePoints || 0;
-    const wins = rankedSoloData?.wins || 0;
-    const losses = rankedSoloData?.losses || 0;
 
     return (
         <div className='flex flex-col h-full'>
@@ -63,16 +47,14 @@ const Page = async ({ params }: Props) => {
                         tag={_tag}
                         level={level}
                         profileIconId={profileIconId}
-                        tier={tier}
-                        rank={rank}
-                        lp={lp}
-                        wins={wins}
-                        losses={losses}
+                        rankedSoloData={rankedSoloData}
                     />
                 </Content>
             </section>
         </div>
     );
 };
+
+const RANKED_SOLO = 'RANKED_SOLO_5x5';
 
 export default Page;

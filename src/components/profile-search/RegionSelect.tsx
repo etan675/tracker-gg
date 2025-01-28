@@ -11,7 +11,7 @@ type Props = Readonly<{
 const RegionSelect = ({ className, value, onChange }: Props) => {
     return (
         <div className={classNames(
-            'flex flex-col justify-center gap-1 pr-5',
+            'flex flex-col justify-center gap-1',
             className
         )}>
             <label 

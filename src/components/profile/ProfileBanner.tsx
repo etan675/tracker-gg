@@ -1,3 +1,4 @@
+import { LeagueEntryType } from '@/types/api/lol/definitions';
 import Image from 'next/image';
 import React from 'react';
 
@@ -6,11 +7,7 @@ type Props = Readonly<{
     tag: string,
     level: number,
     profileIconId: number,
-    tier: string,
-    rank: string,
-    lp: number,
-    wins: number,
-    losses: number,
+    rankedSoloData: LeagueEntryType|undefined
 }>;
 
 const ProfileBanner = async ({ 
@@ -18,12 +15,14 @@ const ProfileBanner = async ({
     tag,
     level,
     profileIconId,
-    tier,
-    rank,
-    lp,
-    wins,
-    losses
+    rankedSoloData,
 }: Props) => {
+    const tier = rankedSoloData?.tier || '';
+    const rank = rankedSoloData?.rank || '';
+    const lp = rankedSoloData?.leaguePoints || 0;
+    const wins = rankedSoloData?.wins || 0;
+    const losses = rankedSoloData?.losses || 0;
+
     const rankIconFileName = tier ? (tier).toLowerCase() : 'unranked';
     const rankedWinPercentage = Math.round((wins / (wins + losses) * 100));
     
@@ -48,7 +47,6 @@ const ProfileBanner = async ({
                     <span className='font-extrabold'>{summonerName}</span> 
                     <span className='text-[#9E9EAF] ml-2'>#{tag}</span>
                 </div>
-
                 <div className='flex gap-2'>
                     <Image
                         src={`https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-shared-components/global/default/images/${rankIconFileName}.png`}
@@ -57,7 +55,6 @@ const ProfileBanner = async ({
                         height={80}
                         priority
                     />
-
                     <div className='flex flex-col justify-center text-xl'>
                         {tier ? (
                             <>

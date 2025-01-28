@@ -15,7 +15,7 @@ const getLeagueData = async (summonerId: string): Promise<LeagueEntryType[]> => 
         return [];
     }
 
-    return res.json();
+    return await res.json();
 }
 
 export {

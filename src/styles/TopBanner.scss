@@ -1,0 +1,18 @@
+.top-banner {
+    &__header {
+        &:active {
+            transform: translateY(1px);
+        }
+    }
+
+    &__header-title {
+        position: relative;
+
+        &::before {
+            content: "Tracker.GG";
+            position: absolute;
+            transform: translate(-2px, -2px);
+            opacity: 0.2;
+        }
+    }
+}

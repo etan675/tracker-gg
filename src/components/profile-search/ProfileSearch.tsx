@@ -31,21 +31,19 @@ const ProfileSearch = ({ className }: Props) => {
     return (
         <form 
             className={classNames(
-                'w-[800px] h-16 rounded-full overflow-hidden bg-[#2F2F2F] flex pl-8 pr-6 py-3 text-sm',
+                'w-[800px] min-w-[500px] h-16 rounded-full overflow-hidden bg-[#2F2F2F] flex gap-5 pl-8 pr-6 py-3 text-sm',
                 className
             )}
             action={`/profile/${region}/${namePath}`}
         >
-            <div className='w-[30%] h-full flex items-center justify-between pr-8'>
-                <RegionSelect 
-                    className='w-full'
-                    value={formState.region}
-                    onChange={handleRegionChange}
-                />
-                <div className='w-[1px] h-[33%] bg-[#908888]' />
-            </div>
+            <RegionSelect 
+                className='flex-[0_1_25%]'
+                value={formState.region}
+                onChange={handleRegionChange}
+            />
+            <div className='w-[1px] h-[40%] bg-[#908888] self-center' />
             <NameSearch 
-                className='w-[70%] h-full'
+                className='flex-auto h-full'
                 value={formState.name}
                 onChange={handleInputChange}
             />

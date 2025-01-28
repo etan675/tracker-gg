@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "classnames": "^2.5.1",
-    "next": "15.0.3",
+    "next": "^15.1.6",
     "react": "19.0.0-rc-66855b96-20241106",
     "react-dom": "19.0.0-rc-66855b96-20241106"
   },
@@ -26,6 +26,7 @@
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "postcss": "^8",
+    "sass": "^1.83.4",
     "tailwindcss": "^3.4.1",
     "ts-node": "^10.9.2",
     "typescript": "^5"
