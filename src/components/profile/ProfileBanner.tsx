@@ -1,4 +1,4 @@
-import { LeagueEntryType } from '@/types/api/lol/definitions';
+import { LeagueEntry } from '@/types/api/lol/definitions';
 import Image from 'next/image';
 import React from 'react';
 
@@ -7,7 +7,7 @@ type Props = Readonly<{
     tag: string,
     level: number,
     profileIconId: number,
-    rankedSoloData: LeagueEntryType|undefined
+    rankedSoloData: LeagueEntry|undefined
 }>;
 
 const ProfileBanner = async ({ 
@@ -53,7 +53,6 @@ const ProfileBanner = async ({
                         alt='rank'
                         width={80}
                         height={80}
-                        priority
                     />
                     <div className='flex flex-col justify-center text-xl'>
                         {tier ? (

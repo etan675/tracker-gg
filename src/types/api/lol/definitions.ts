@@ -1,5 +1,5 @@
 
-export type LeagueEntryType = {
+export interface LeagueEntry {
     summonerId: string,
     queueType: string,
     tier: string,
@@ -9,77 +9,77 @@ export type LeagueEntryType = {
     losses: number
 }
 
-export type AccountDataType = {
+export interface AccountData {
     puuid: string,
     gameName: string,
     tagLine: string
 }
 
-export type SummonerDataType = {
+export interface SummonerData {
     id: string,
     puuid: string,
     profileIconId: number,
     summonerLevel: number
 }
 
-// match.info.participants[0]
-export type MatchParticipantType = {
-    // puuid
+export interface MatchParticipant {
     puuid: string,
-    // riotIdGameName
     summonerName: string,
-    // profileIcon
+    tag: string,
     profileIconId: number,
-    // championName
     championName: string,
-    // championId
     championId: string,
-    // lane
     lane: string,
-    // role
     role: string,
-    // item0, item1, item2....
-    itemIds: string[],
-    // kills
+    teamId: number,
+    itemIds: number[],
     kills: number,
-    // deaths
     deaths: number,
-    // assists
     assists: number,
-    // win
     win: boolean,
-    // totalDamageDealtToChampions
     damageToChampions: number,
-    // neutralMinionsKilled + totalMinionsKilled
     cs: number,
-    // goldEarned
     goldEarned: number,
-    // summoner1Id
     summonerSpell1Id: number,
-    // summoner2Id 
     summonerSpell2Id: number,
     // metadata for runes, 0 = primary, 1 = secondary
-    // perks.styles[0], perks.styles[1]
-    perkStyles: PerkStyleType[] 
+    perkStyles: PerkStyle[]
 }
 
-export type PerkStyleType = {
-    // id for rune tree (sorcery, domination), data from communitydragon
-    // perks.styles[0].style
+export interface PerkStyle {
+    // id for rune tree (sorcery, domination)
     styleId: number,
-    // selections in run tree, list of perkIds, primary has 4 selections, secondary has 3 selections
-    // perks.styles[0].selections[0].perk
+    // selections in rune tree, list of perkIds, primary will have 4 selections, secondary will have 3 selections
     perkSelections: number[]
 }
 
-export type MatchDataType = {
-    // list of participants
-    // match.info.participants[].
-    participants: MatchParticipantType[],
+export interface MatchData {
+    participants: MatchParticipant[],
     // time in seconds
-    // match.info.gameDuration
     duration: number,
-    // id of game type, data from lol constants api
-    // match.info.queueId
+    // timestamp (milliseconds date value) for when the game started
+    startTimestamp: number,
     queueId: number
 }
+
+export interface QueueType {
+    queueId: number,
+    map: string,
+    description: string,
+}
+
+export interface GameModifier {
+    id: number,
+    name: string,
+    iconFilename: string,
+}
+
+export interface SummonerSpell extends GameModifier {}
+
+export interface RuneTree extends GameModifier {}
+
+export interface Rune extends GameModifier {
+    iconPath: string
+}
+
+export interface Item extends GameModifier {}

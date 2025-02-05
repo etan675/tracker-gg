@@ -14,7 +14,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className='w-screen h-screen overflow-hidden bg-[#212121] text-white box-border antialiased'
+        className='w-screen h-screen overflow-hidden bg-[#212121] text-white antialiased'
       >
         <div className="flex flex-col w-full h-full ">
           <TopBanner />

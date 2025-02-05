@@ -1,8 +1,6 @@
-'use server';
+import { LeagueEntry } from "@/types/api/lol/definitions";
 
-import { LeagueEntryType } from "@/types/api/lol/definitions";
-
-const getLeagueData = async (summonerId: string): Promise<LeagueEntryType[]> => {
+const getLeagueData = async (summonerId: string): Promise<LeagueEntry[]> => {
     const res = await fetch(
         `https://oc1.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerId}`,
         {
@@ -15,7 +13,16 @@ const getLeagueData = async (summonerId: string): Promise<LeagueEntryType[]> => 
         return [];
     }
 
-    return await res.json();
+    const data: Record<string, any>[] = await res.json();
+    return data.map((entry) => ({
+        summonerId: entry.summonerId,
+        queueType: entry.queueType,
+        tier: entry.tier,
+        rank: entry.rank,
+        leaguePoints: entry.leaguePoints,
+        wins: entry.wins,
+        losses: entry.losses
+    }));
 }
 
 export {

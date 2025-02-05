@@ -12,7 +12,7 @@ type Props = Readonly<{
 const TopBanner = ({ className }: Props) => {
   return (
     <header className={classNames(
-        'w-full h-20 py-5 px-8 flex items-center bg-[#4679E1] border-b border-b-blue-900',
+        'w-full h-20 py-5 px-8 flex items-center bg-[#0c2a67] border-b border-b-blue-900',
         className
     )}>
         <Link 
@@ -22,7 +22,7 @@ const TopBanner = ({ className }: Props) => {
           )}
           href='/'
         >
-            <Image className='rounded-md' src={logo} alt="app logo" width={40} height={40} priority />
+            <Image className='rounded-md' src={logo} alt="app logo" width={40} height={40} />
             <span className={classNames(
               'top-banner__header-title',
               'text-3xl font-bold text-[#b6cef9]'

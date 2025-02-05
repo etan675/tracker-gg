@@ -7,7 +7,6 @@ type Props = Readonly<{
 
 const ProfileNotFound = ({ summonerName, tag }: Props) => {
     const searchedPlayerName = tag ? `${summonerName}#${tag}` : summonerName;
-
     return (
         <div className='flex justify-center items-center w-full h-full'>
             <p className='text-2xl'>
