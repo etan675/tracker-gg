@@ -38,7 +38,7 @@ const Match = async ({
     const gameMins = Math.floor(matchData.duration / 60);
     const gameSeconds = matchData.duration % 60;
     const gameTotalMins = matchData.duration / 60;
-    const gameDate = new Date(matchData.startTimestamp).toLocaleDateString(undefined, {  
+    const gameDate = new Date(matchData.startTimestamp).toLocaleDateString('en-GB', {  
         day: "2-digit",
         month: "2-digit",
         year: "2-digit",

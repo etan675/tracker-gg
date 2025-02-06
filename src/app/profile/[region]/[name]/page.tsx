@@ -68,7 +68,7 @@ const Page = async ({ params }: Props) => {
                     <div className='flex-1 flex flex-col gap-3'>
                         {matches.map(match => {
                             return (
-                                <Suspense fallback={<MatchSkeleton />}>
+                                <Suspense key={match.id} fallback={<MatchSkeleton />}>
                                     <Match 
                                         key={match.id}
                                         className='last:mb-10'
