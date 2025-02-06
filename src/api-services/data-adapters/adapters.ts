@@ -48,7 +48,8 @@ const adaptMatchData = (apiData: Record<string, any>): MatchData => {
             goldEarned: pData.goldEarned as number,
             summonerSpell1Id: pData.summoner1Id as number,
             summonerSpell2Id: pData.summoner2Id as number,
-            perkStyles
+            perkStyles,
+            teamEarlySurrendered: pData.teamEarlySurrendered as boolean
         });
     });
 

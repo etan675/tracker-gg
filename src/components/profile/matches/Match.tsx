@@ -46,7 +46,7 @@ const Match = async ({
 
     // individual
     const csPerMin = (player.cs / gameTotalMins).toFixed(1);
-    const kdaRatio = ((player.kills + player.assists) / player.deaths).toFixed(2);
+    const kdaRatio = player.deaths ? ((player.kills + player.assists) / player.deaths).toFixed(2) : 0;
     const totalKillsTeam = participants.reduce((cum, p) => {
         return p.teamId === player.teamId ? cum + p.kills : cum;
     }, 0);
@@ -59,10 +59,14 @@ const Match = async ({
                 <div>{gameDate}</div>
                 <div></div>
                 <div>
-                    {player.win ? (
-                        <span className='text-green-600'>Victory</span>
-                    ) : (
-                        <span className='text-red-600'>Defeat</span>
+                    {isRemake(matchData) ? (
+                        <span className='text-yellow-600'>Remake</span>
+                    ): (
+                        player.win ? (
+                            <span className='text-green-600'>Victory</span>
+                        ) : (
+                            <span className='text-red-600'>Defeat</span>
+                        )
                     )}
                 </div>
                 <div>{gameMins}m {gameSeconds}s</div>
@@ -121,7 +125,7 @@ const Match = async ({
                     <span>{player.assists}</span>
                 </div>
                 <div className="match-data__kda-ratio">
-                    KDA: {kdaRatio}:1
+                    KDA: {kdaRatio ? `${kdaRatio}:1` : 'Perfect'}
                 </div>
                 {items.map((item, index) => {
                     return (
@@ -168,5 +172,13 @@ const Match = async ({
         </div>
     )
 };
+
+const isRemake = (matchData: MatchData) => {
+    if (matchData.duration < 180) {
+        return true;
+    }
+    
+    return matchData.participants.some(p => p.teamEarlySurrendered);
+}
 
 export default Match;

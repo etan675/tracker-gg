@@ -51,7 +51,7 @@ const Page = async ({ params }: Props) => {
     ).filter(match => !!match);
 
     return (
-        <div className='flex-grow flex flex-col gap-3 w-screen overflow-y-hidden'>
+        <div className='flex-grow flex flex-col gap-3 w-screen overflow-auto'>
             <section className='bg-[#313132] py-10 grow-0'>
                 <Content>
                     <ProfileBanner 
@@ -63,7 +63,7 @@ const Page = async ({ params }: Props) => {
                     />
                 </Content>
             </section>
-            <section className='flex-grow overflow-auto'>
+            <section className='flex-grow'>
                 <Content className='h-full'>
                     <div className='flex-1 flex flex-col gap-3'>
                         {matches.map(match => {

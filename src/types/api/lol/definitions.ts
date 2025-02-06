@@ -43,7 +43,8 @@ export interface MatchParticipant {
     summonerSpell1Id: number,
     summonerSpell2Id: number,
     // metadata for runes, 0 = primary, 1 = secondary
-    perkStyles: PerkStyle[]
+    perkStyles: PerkStyle[],
+    teamEarlySurrendered: boolean,
 }
 
 export interface PerkStyle {
