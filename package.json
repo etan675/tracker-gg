@@ -13,8 +13,8 @@
   "dependencies": {
     "classnames": "^2.5.1",
     "next": "^15.1.6",
-    "react": "19.0.0-rc-66855b96-20241106",
-    "react-dom": "19.0.0-rc-66855b96-20241106"
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",
