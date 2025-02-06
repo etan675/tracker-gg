@@ -1,1 +1,1 @@
-Website that tracks your league of legends profile, showing rank, main champions, and match history, similar to OP.GG
+Website that tracks league of legends player statistics and matches in real time, similar to OP.GG
