@@ -7,10 +7,10 @@ const Page = () => {
     <Content className='h-full'>
       <div className='w-full h-full flex flex-col justify-center items-center gap-5'>
         <div className='text-6xl font-black text-center'>
-          Track your climb
+          Track your league
         </div>
         <div className='text-xl text-[#AEAEAE] font-medium text-center'>
-          Tracker.GG brings you the clarity that you need for your ranked journey.
+          Get in-depth analytics and real-time insights on your gaming performance.
         </div>
         <ProfileSearch className='mt-3' />
       </div>
