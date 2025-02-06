@@ -53,6 +53,7 @@ const adaptMatchData = (apiData: Record<string, any>): MatchData => {
     });
 
     return {
+        id: apiData.metadata?.matchId as number,
         duration: apiData.info?.gameDuration as number,
         queueId: apiData.info?.queueId as number,
         startTimestamp: apiData.info?.gameStartTimestamp as number,

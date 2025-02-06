@@ -8,7 +8,7 @@ type Props = Readonly<{
 }>;
 
 //TODO: use region filter in real query
-const RegionSelect = ({ className, value, onChange }: Props) => {
+const RegionSelect = ({ className = '', value, onChange }: Props) => {
     return (
         <div className={classNames(
             'flex flex-col justify-center gap-1',

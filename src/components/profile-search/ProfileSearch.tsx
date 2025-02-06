@@ -11,7 +11,7 @@ type Props = Readonly<{
     className?: string
 }>;
 
-const ProfileSearch = ({ className }: Props) => {
+const ProfileSearch = ({ className = '' }: Props) => {
     const [formState, setFormState] = useState({ region: 'OCE', name: '' });
 
     const handleRegionChange: ChangeEventHandler<HTMLSelectElement> = (e) => {

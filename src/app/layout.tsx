@@ -14,11 +14,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className='w-screen h-screen overflow-hidden bg-[#212121] text-white antialiased'
+        className='w-screen h-screen bg-[#212121] text-white antialiased'
       >
-        <div className="flex flex-col w-full h-full ">
+        <div className="flex flex-col w-full h-full">
           <TopBanner />
-          <main className="flex-grow">
+          <main className="flex-grow overflow-y-hidden">
             {children}
           </main>
         </div>

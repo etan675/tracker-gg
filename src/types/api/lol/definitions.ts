@@ -54,6 +54,7 @@ export interface PerkStyle {
 }
 
 export interface MatchData {
+    id: number,
     participants: MatchParticipant[],
     // time in seconds
     duration: number,

@@ -9,7 +9,7 @@ type Props = Readonly<{
     onChange: ChangeEventHandler<HTMLInputElement>
 }>;
 
-const NameSearch = ({ className, value, onChange }: Props) => {
+const NameSearch = ({ className = '', value, onChange }: Props) => {
     return (
         <div className={classNames(
             'flex flex-col gap-1 justify-center',

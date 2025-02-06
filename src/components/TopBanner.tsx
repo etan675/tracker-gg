@@ -9,7 +9,7 @@ type Props = Readonly<{
     className?: string 
 }>
 
-const TopBanner = ({ className }: Props) => {
+const TopBanner = ({ className = '' }: Props) => {
   return (
     <header className={classNames(
         'w-full h-20 py-5 px-8 flex items-center bg-[#0c2a67] border-b border-b-blue-900',
