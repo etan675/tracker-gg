@@ -22,7 +22,7 @@ const TopBanner = ({ className }: Props) => {
           )}
           href='/'
         >
-            <Image className='rounded-md' src={logo} alt="app logo" width={40} height={40} />
+            <Image className='rounded-md' src={logo} alt="app logo" width={40} height={40} priority />
             <span className={classNames(
               'top-banner__header-title',
               'text-3xl font-bold text-[#b6cef9]'

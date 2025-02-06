@@ -72,6 +72,7 @@ const Match = async ({
                 height={128}
                 className='match-data__icon match-data__player-champion'
                 title={player.championName}
+                priority
             />
             <Image
                 src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/data/spells/icons2d/${summonerSpell1?.iconFilename || 'summoner_empty.png'}`}
@@ -80,6 +81,7 @@ const Match = async ({
                 height={64}
                 className="match-data__icon match-data__summ-1"
                 title={summonerSpell1?.name || ''}
+                priority
             />
             <Image
                 src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/data/spells/icons2d/${summonerSpell2?.iconFilename || 'summoner_empty.png'}`}
@@ -88,6 +90,7 @@ const Match = async ({
                 height={64}
                 className="match-data__icon match-data__summ-2"
                 title={summonerSpell2?.name || ''}
+                priority
             />
             <Image
                 src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/${mainRune?.iconPath || 'runesicon.png'}`}
@@ -96,6 +99,7 @@ const Match = async ({
                 height={64}
                 className="match-data__icon match-data__rune-1"
                 title={mainRune?.name || ''}
+                priority
             />
             <Image
                 src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/${subRuneTree?.iconFilename || 'runesicon.png'}`}
@@ -104,6 +108,7 @@ const Match = async ({
                 height={64}
                 className="match-data__icon match-data__rune-2"
                 title={subRuneTree?.name || ''}
+                priority
             />
             <div className="match-data__kda">
                 <span>{player.kills}</span>
@@ -125,6 +130,7 @@ const Match = async ({
                         height={64}
                         className={`match-data__icon match-data__item-${index+1}`}
                         title={item.name}
+                        priority
                     />
                 )
             })}
@@ -144,6 +150,7 @@ const Match = async ({
                             height={64}
                             className='match-data__icon match-data__participant-champion'
                             title={participant.championName}
+                            priority
                         />
                         <div 
                             className='match-data__participant-name'

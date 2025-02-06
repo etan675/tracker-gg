@@ -53,6 +53,7 @@ const ProfileBanner = async ({
                         alt='rank'
                         width={80}
                         height={80}
+                        priority
                     />
                     <div className='flex flex-col justify-center text-xl'>
                         {tier ? (
