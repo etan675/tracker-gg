@@ -1,9 +1,10 @@
 import { apiRegions } from "@/lib/constants";
-import { ApiRegion, LeagueEntry } from "@/types/api/lol/definitions";
+import { ApiRegion, LeagueEntry } from "@/types/lol/definitions";
+import { LeagueSchema } from "./validation/schemas/league-schema";
 
-const getLeagueData = async (summonerId: string, region: ApiRegion): Promise<LeagueEntry[]> => {
+const getLeagueData = async (summonerId: string, region: ApiRegion): Promise<LeagueEntry[]|null> => {
     const res = await fetch(
-        `https://${apiRegions[region].SERVER_CODE}.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerId}`,
+        `https://${apiRegions[region].SERVER_CODE}.api.riotgames.com/lol/v/v4/entries/by-summoner/${summonerId}`,
         {
             method: "GET",
             headers: { "X-Riot-Token": process.env.API_KEY ?? '' }
@@ -11,19 +12,21 @@ const getLeagueData = async (summonerId: string, region: ApiRegion): Promise<Lea
     );
 
     if (!res.ok) {
-        return [];
+        return null;
     }
 
-    const data: Record<string, any>[] = await res.json();
-    return data.map((entry) => ({
-        summonerId: entry.summonerId,
-        queueType: entry.queueType,
-        tier: entry.tier,
-        rank: entry.rank,
-        leaguePoints: entry.leaguePoints,
-        wins: entry.wins,
-        losses: entry.losses
-    }));
+    const data = await res.json();
+    const v =  LeagueSchema.parse(data);
+
+    return v.map(v => ({
+        summonerId: v.summonerId,
+        queueType: v.queueType,
+        tier: v.tier,
+        rank: v.rank,
+        leaguePoints: v.leaguePoints,
+        wins: v.wins,
+        losses: v.losses,
+    }))
 }
 
 export {

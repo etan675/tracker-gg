@@ -1,5 +1,5 @@
 import { getItem, getQueueType, getRune, getRuneTree, getSummonerSpell } from '@/api-services/static';
-import { MatchData } from '@/types/api/lol/definitions';
+import { MatchData } from '@/types/lol/definitions';
 import React from 'react';
 import '@/styles/MatchHistory.scss';
 import Image from 'next/image';

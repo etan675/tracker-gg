@@ -31,7 +31,7 @@ export interface MatchParticipant {
     tag: string,
     profileIconId: number,
     championName: string,
-    championId: string,
+    championId: number,
     lane: string,
     role: string,
     teamId: number,
@@ -58,7 +58,7 @@ export interface PerkStyle {
 }
 
 export interface MatchData {
-    id: number,
+    id: string,
     participants: MatchParticipant[],
     // time in seconds
     duration: number,
@@ -70,7 +70,7 @@ export interface MatchData {
 export interface QueueType {
     queueId: number,
     map: string,
-    description: string,
+    description: string|null,
 }
 
 export interface GameModifier {

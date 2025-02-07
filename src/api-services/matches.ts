@@ -1,6 +1,7 @@
-import { ApiRegion, MatchData } from "@/types/api/lol/definitions";
+import { ApiRegion, MatchData } from "@/types/lol/definitions";
 import { adaptMatchData } from "./data-adapters/adapters";
 import { apiRegions } from "@/lib/constants";
+import { MatchIdsSchema, MatchSchema } from "./validation/schemas/match-schema";
 
 // match api for some regions in asia require routing to the south east asia (sea) servers.
 // refer to https://developer.riotgames.com/apis#match-v5/GET_getMatch
@@ -19,8 +20,9 @@ const getPlayerMatchIds = async (puuid: string, region: ApiRegion): Promise<stri
     if (!res.ok) {
         return null;
     }
-
-    return await res.json();
+    
+    const data = await res.json();
+    return MatchIdsSchema.parse(data);
 }
 
 const getMatchData = async (matchId: string, region: ApiRegion): Promise<MatchData|null> => {
@@ -39,7 +41,8 @@ const getMatchData = async (matchId: string, region: ApiRegion): Promise<MatchDa
     }
 
     const data = await res.json();
-    return adaptMatchData(data);
+    const v = MatchSchema.parse(data);
+    return adaptMatchData(v);
 }
 
 const SEA_REGIONS = new Set(['OCE']);

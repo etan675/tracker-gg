@@ -1,7 +1,11 @@
-import { QueueType } from "@/types/api/lol/definitions";
-import { adaptItemData, adaptQueueData, adaptRuneData, adaptRuneTreeData, adaptSummonerSpellData } from "./data-adapters/adapters";
+import { QueueType } from "@/types/lol/definitions";
+import { adaptItemData, adaptRuneData, adaptRuneTreeData, adaptSummonerSpellData } from "./data-adapters/adapters";
+import { QueuesSchema } from "./validation/schemas/queues-schema";
+import { SummonerSpellsSchema } from "./validation/schemas/summonerspells-schema";
+import { PerksSchema, PerkStylesSchema } from "./validation/schemas/perks-schema";
+import { ItemsSchema } from "./validation/schemas/item-schema";
 
-const getQueuesJson = async (): Promise<Record<string, any>[]|null> => {
+const getQueuesJson = async () => {
     const res = await fetch('https://static.developer.riotgames.com/docs/lol/queues.json');
 
     if (!res.ok) {
@@ -11,16 +15,18 @@ const getQueuesJson = async (): Promise<Record<string, any>[]|null> => {
     return await res.json();
 }
 
-const getQueueType = async (queueId: number): Promise<QueueType|null> => {
-    const queuesData = await getQueuesJson();
-    const queueData = queuesData?.find(queueData => {
-        return queueData.queueId === queueId;
+const getQueueType = async (queueId: number): Promise<QueueType|undefined> => {
+    const data = await getQueuesJson();
+    const v = QueuesSchema.parse(data);
+
+    const queueData = v.find(type => {
+        return type.queueId === queueId;
     })
 
-    return queueData ? adaptQueueData(queueData) : null;
+    return queueData;
 }
 
-const getSummonerSpellJson = async (): Promise<Record<string, any>[]|null> => {
+const getSummonerSpellJson = async () => {
     const res = await fetch('https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/summoner-spells.json');
 
     if (!res.ok) {
@@ -31,15 +37,17 @@ const getSummonerSpellJson = async (): Promise<Record<string, any>[]|null> => {
 }
 
 const getSummonerSpell = async (summonerSpellId: number) => {
-    const spellsData = await getSummonerSpellJson();
-    const spell = spellsData?.find(spellData => {
-        return spellData.id === summonerSpellId;
+    const data = await getSummonerSpellJson();
+    const v = SummonerSpellsSchema.parse(data);
+
+    const spellData = v.find(spell => {
+        return spell.id === summonerSpellId;
     })
 
-    return spell ? adaptSummonerSpellData(spell) : null;
+    return spellData ? adaptSummonerSpellData(spellData) : null;
 }
 
-const getPerksJson = async (): Promise<Record<string, any>[]|null> => {
+const getPerksJson = async () => {
     const res = await fetch('https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perks.json');
 
     if (!res.ok) {
@@ -50,15 +58,17 @@ const getPerksJson = async (): Promise<Record<string, any>[]|null> => {
 }
 
 const getRune = async (runeId: number) => {
-    const perksData = await getPerksJson();
-    const runeData = perksData?.find(perk => {
+    const data = await getPerksJson();
+    const v = PerksSchema.parse(data);
+
+    const runeData = v.find(perk => {
         return perk.id === runeId;
     });
 
     return runeData ? adaptRuneData(runeData) : null ;
 }
 
-const getPerkStylesJson = async (): Promise<Record<string, any>|null> => {
+const getPerkStylesJson = async () => {
     const res = await fetch('https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perkstyles.json');
 
     if (!res.ok) {
@@ -69,16 +79,17 @@ const getPerkStylesJson = async (): Promise<Record<string, any>|null> => {
 }
 
 const getRuneTree = async (runeTreeId: number) => {
-    const perkStylesJson = await getPerkStylesJson();
-    const perkStylesData: Record<string, any>[] = perkStylesJson?.styles || [];
-    const runeTreeData = perkStylesData.find(perkStyle => {
+    const data = await getPerkStylesJson();
+    const v = PerkStylesSchema.parse(data);
+
+    const runeTreeData = v.styles.find(perkStyle => {
         return perkStyle.id === runeTreeId;
     });
 
     return runeTreeData ? adaptRuneTreeData(runeTreeData) : null;
 }
 
-const getItemsJson = async (): Promise<Record<string, any>[]|null> => {
+const getItemsJson = async () => {
     const res = await fetch('https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/items.json');
 
     if (!res.ok) {
@@ -89,12 +100,14 @@ const getItemsJson = async (): Promise<Record<string, any>[]|null> => {
 }
 
 const getItem = async (itemId: number) => {
-    const itemsData = await getItemsJson();
-    const item = itemsData?.find(itemData => {
-        return itemData.id === itemId;
+    const data = await getItemsJson();
+    const v = ItemsSchema.parse(data);
+
+    const itemData = v.find(item => {
+        return item.id === itemId;
     })
 
-    return item ? adaptItemData(item) : null;
+    return itemData ? adaptItemData(itemData) : null;
 }
 
 export {

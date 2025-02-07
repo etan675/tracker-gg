@@ -1,4 +1,4 @@
-import { LeagueEntry } from '@/types/api/lol/definitions';
+import { LeagueEntry } from '@/types/lol/definitions';
 import Image from 'next/image';
 import React from 'react';
 
@@ -7,7 +7,7 @@ type Props = Readonly<{
     tag: string,
     level: number,
     profileIconId: number,
-    rankedSoloData: LeagueEntry|undefined
+    rankedSoloData: LeagueEntry|undefined|null
 }>;
 
 const ProfileBanner = async ({ 
@@ -17,6 +17,8 @@ const ProfileBanner = async ({
     profileIconId,
     rankedSoloData,
 }: Props) => {
+    const rankedDataUnavailable = rankedSoloData === null;
+
     const tier = rankedSoloData?.tier || '';
     const rank = rankedSoloData?.rank || '';
     const lp = rankedSoloData?.leaguePoints || 0;
@@ -27,7 +29,7 @@ const ProfileBanner = async ({
     const rankedWinPercentage = Math.round((wins / (wins + losses) * 100));
     
     return (
-        <div className='flex gap-6 items-center min-w-[560px]'>
+        <div className='flex gap-6 min-w-[560px]'>
             <div className='relative w-fit h-fit'>
                 <Image
                     className='rounded-xl'
@@ -41,30 +43,35 @@ const ProfileBanner = async ({
                     {level}
                 </div>
             </div>
-
             <div className='flex flex-col'>
                 <div className='text-3xl'>
                     <span className='font-extrabold'>{summonerName}</span> 
                     <span className='text-[#9E9EAF] ml-2'>#{tag}</span>
                 </div>
                 <div className='flex gap-2'>
-                    <Image
-                        src={`https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-shared-components/global/default/images/${rankIconFileName}.png`}
-                        alt='rank'
-                        width={80}
-                        height={80}
-                        priority
-                    />
-                    <div className='flex flex-col justify-center text-xl'>
-                        {tier ? (
-                            <>
+                    {rankedDataUnavailable ? (
+                        <p className='mt-4 text-[#9E9EAF]'>Sorry, ranked data is currently unavailable.</p>
+                    ) : (
+                        <>
+                        <Image
+                            src={`https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-shared-components/global/default/images/${rankIconFileName}.png`}
+                            alt='rank'
+                            width={80}
+                            height={80}
+                            priority
+                        />
+                        <div className='flex flex-col justify-center text-xl'>
+                            {tier ? (
+                                <>
                                 <p className='font-bold text-[#70A3F3]'>{tier} {rank} - {lp} lp</p>
                                 <p className='text-lg text-[#9E9EAF]'>{wins}W - {losses}L &nbsp; Win ratio: {rankedWinPercentage}%</p>
-                            </>
-                        ) : (
-                            <p className='text-[#9E9EAF]'>Unranked</p>
-                        )}
-                    </div>
+                                </>
+                            ) : (
+                                <p className='text-[#9E9EAF]'>Unranked</p>
+                            )}
+                        </div>
+                        </>
+                    )}
                 </div>
             </div>
         </div>

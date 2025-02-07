@@ -1,5 +1,6 @@
 import { apiRegions } from "@/lib/constants";
-import { AccountData, ApiRegion, SummonerData } from "@/types/api/lol/definitions";
+import { AccountData, ApiRegion, SummonerData } from "@/types/lol/definitions";
+import { AccountSchema, SummonerSchema } from "./validation/schemas/profile-schema";
 
 const getAccountData = async (summonerName: string, tag: string, region: ApiRegion): Promise<AccountData|null> => {
     const res = await fetch(
@@ -15,10 +16,11 @@ const getAccountData = async (summonerName: string, tag: string, region: ApiRegi
     }
 
     const data = await res.json();
+    const v = AccountSchema.parse(data);
     return {
-        puuid: data.puuid,
-        gameName: data.gameName,
-        tagLine: data.tagLine
+        puuid: v.puuid,
+        gameName: v.gameName,
+        tagLine: v.tagLine
     }
 }
 
@@ -36,11 +38,12 @@ const getSummonerData = async (puuid: string, region: ApiRegion): Promise<Summon
     }
 
     const data = await res.json();
+    const v = SummonerSchema.parse(data);
     return {
-        id: data.id,
-        puuid: data.puuid,
-        profileIconId: data.profileIconId,
-        summonerLevel: data.summonerLevel
+        id: v.id,
+        puuid: v.puuid,
+        profileIconId: v.profileIconId,
+        summonerLevel: v.summonerLevel
     }
 }
 

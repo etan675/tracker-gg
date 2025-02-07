@@ -3,7 +3,7 @@ import ProfileBanner from '@/components/profile/ProfileBanner';
 import Content from '@/components/Content';
 import { getAccountData, getSummonerData } from '@/api-services/profile';
 import { getLeagueData } from '@/api-services/league';
-import { AccountData, LeagueEntry, MatchData, SummonerData } from '@/types/api/lol/definitions';
+import { AccountData, LeagueEntry, MatchData, SummonerData } from '@/types/lol/definitions';
 import { keyOfObj, parseNameSearchFromURL } from '@/lib/utils';
 import ProfileNotFound from '@/components/profile/ProfileNotFound';
 import { getMatchData, getPlayerMatchIds } from '@/api-services/matches';
@@ -36,7 +36,7 @@ const Page = async ({ params }: Props) => {
         return <ProfileNotFound summonerName={summonerName} tag={tag} region={region} />;
     }
 
-    const leagueData: LeagueEntry[] = await getLeagueData(summonerData.id, region);
+    const leagueData: LeagueEntry[]|null = await getLeagueData(summonerData.id, region);
 
     const _summonerName = accountData.gameName;
     const _tag = accountData.tagLine;
@@ -44,11 +44,10 @@ const Page = async ({ params }: Props) => {
     const level = summonerData.summonerLevel;
     const profileIconId = summonerData.profileIconId;
 
-    const rankedSoloData = leagueData.find(entry => {
+    const rankedSoloData = leagueData !== null ? leagueData.find(entry => {
         return entry.queueType === RANKED_SOLO;
-    });
+    }) : null;
 
-    // matches
     const matchIds = await getPlayerMatchIds(accountData.puuid, region) || [];
     const matches: MatchData[] = (
         await Promise.all(matchIds.map(matchId => {
