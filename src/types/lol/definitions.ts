@@ -79,12 +79,12 @@ export interface GameModifier {
     iconFilename: string,
 }
 
-export interface SummonerSpell extends GameModifier {}
+export type SummonerSpell = GameModifier
 
-export interface RuneTree extends GameModifier {}
+export type RuneTree = GameModifier
 
 export interface Rune extends GameModifier {
     iconPath: string
 }
 
-export interface Item extends GameModifier {}
+export type Item = GameModifier
