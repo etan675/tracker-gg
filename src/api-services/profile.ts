@@ -1,8 +1,9 @@
-import { AccountData, SummonerData } from "@/types/api/lol/definitions";
+import { apiRegions } from "@/lib/constants";
+import { AccountData, ApiRegion, SummonerData } from "@/types/api/lol/definitions";
 
-const getAccountData = async (summonerName: string, tag: string): Promise<AccountData|null> => {
+const getAccountData = async (summonerName: string, tag: string, region: ApiRegion): Promise<AccountData|null> => {
     const res = await fetch(
-        `https://asia.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${summonerName}/${tag}`,
+        `https://${apiRegions[region].AREA}.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${summonerName}/${tag}`,
         {
             method: "GET",
             headers: { "X-Riot-Token": process.env.API_KEY ?? '' }
@@ -21,9 +22,9 @@ const getAccountData = async (summonerName: string, tag: string): Promise<Accoun
     }
 }
 
-const getSummonerData = async (puuid: string): Promise<SummonerData|null> => {
+const getSummonerData = async (puuid: string, region: ApiRegion): Promise<SummonerData|null> => {
     const res = await fetch(
-        `https://oc1.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/${puuid}`, 
+        `https://${apiRegions[region].SERVER_CODE}.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/${puuid}`, 
         {
             method: "GET",
             headers: { "X-Riot-Token": process.env.API_KEY ?? '' }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import TopBanner from "@/components/TopBanner";
+import AppContextProvider from "@/context-providers/AppContextProvider";
 
 export const metadata: Metadata = {
   title: "Tracker.GG",
@@ -18,9 +19,11 @@ export default function RootLayout({
       >
         <div className="flex flex-col w-full h-full">
           <TopBanner />
-          <main className="flex-grow overflow-y-hidden">
-            {children}
-          </main>
+            <main className="flex-grow overflow-y-hidden">
+              <AppContextProvider>
+                {children}
+              </AppContextProvider>
+            </main>
         </div>
       </body>
     </html>

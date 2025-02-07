@@ -1,8 +1,9 @@
-import { LeagueEntry } from "@/types/api/lol/definitions";
+import { apiRegions } from "@/lib/constants";
+import { ApiRegion, LeagueEntry } from "@/types/api/lol/definitions";
 
-const getLeagueData = async (summonerId: string): Promise<LeagueEntry[]> => {
+const getLeagueData = async (summonerId: string, region: ApiRegion): Promise<LeagueEntry[]> => {
     const res = await fetch(
-        `https://oc1.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerId}`,
+        `https://${apiRegions[region].SERVER_CODE}.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerId}`,
         {
             method: "GET",
             headers: { "X-Riot-Token": process.env.API_KEY ?? '' }

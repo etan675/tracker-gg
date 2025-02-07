@@ -4,11 +4,12 @@ import Content from '@/components/Content';
 import { getAccountData, getSummonerData } from '@/api-services/profile';
 import { getLeagueData } from '@/api-services/league';
 import { AccountData, LeagueEntry, MatchData, SummonerData } from '@/types/api/lol/definitions';
-import { parseNameSearchFromURL } from '@/lib/utils';
+import { keyOfObj, parseNameSearchFromURL } from '@/lib/utils';
 import ProfileNotFound from '@/components/profile/ProfileNotFound';
 import { getMatchData, getPlayerMatchIds } from '@/api-services/matches';
 import Match from '@/components/profile/matches/Match';
 import MatchSkeleton from '@/components/profile/matches/MatchSkeleton';
+import { apiRegions } from '@/lib/constants';
 
 type Props = Readonly<{
     params: Promise<{ region: string, name: string }>, 
@@ -16,21 +17,26 @@ type Props = Readonly<{
 
 const Page = async ({ params }: Props) => {    
     const _params = await params;
+    const region = _params.region;
     const { summonerName, tag } = parseNameSearchFromURL(_params.name);
 
-    const accountData: AccountData|null = await getAccountData(summonerName, tag);
+    if (!keyOfObj(region, apiRegions)) {
+        throw new Error('Region does not exist');
+    }
+
+    const accountData: AccountData|null = await getAccountData(summonerName, tag, region);
 
     if (!accountData) {
-        return <ProfileNotFound summonerName={summonerName} tag={tag} />;
+        return <ProfileNotFound summonerName={summonerName} tag={tag} region={region} />;
     }
 
-    const summonerData: SummonerData|null = await getSummonerData(accountData.puuid);
+    const summonerData: SummonerData|null = await getSummonerData(accountData.puuid, region);
 
     if (!summonerData) {
-        return <ProfileNotFound summonerName={summonerName} tag={tag} />;
+        return <ProfileNotFound summonerName={summonerName} tag={tag} region={region} />;
     }
 
-    const leagueData: LeagueEntry[] = await getLeagueData(summonerData.id);
+    const leagueData: LeagueEntry[] = await getLeagueData(summonerData.id, region);
 
     const _summonerName = accountData.gameName;
     const _tag = accountData.tagLine;
@@ -43,10 +49,10 @@ const Page = async ({ params }: Props) => {
     });
 
     // matches
-    const matchIds = await getPlayerMatchIds(accountData.puuid) || [];
+    const matchIds = await getPlayerMatchIds(accountData.puuid, region) || [];
     const matches: MatchData[] = (
         await Promise.all(matchIds.map(matchId => {
-            return getMatchData(matchId);
+            return getMatchData(matchId, region);
         }))
     ).filter(match => !!match);
 

@@ -1,32 +1,43 @@
 'use client'
 
-import React, { ChangeEventHandler, useState } from 'react';
+import React, { ChangeEventHandler, FormEventHandler, useContext, useState } from 'react';
 import classNames from 'classnames';
 import SearchIcon from '../svg-components/SearchIcon';
 import RegionSelect from './RegionSelect';
 import NameSearch from './NameSearch';
 import { encodeNameSearchInUrl } from '@/lib/utils';
+import AppContext from '@/contexts/AppContext';
+import { useRouter } from 'next/navigation';
 
 type Props = Readonly<{
     className?: string
 }>;
 
 const ProfileSearch = ({ className = '' }: Props) => {
-    const [formState, setFormState] = useState({ region: 'OCE', name: '' });
+    const { userRegion } = useContext(AppContext);
+    const [formState, setFormState] = useState({ region: userRegion.region, name: '' });
+    const router = useRouter();
 
     const handleRegionChange: ChangeEventHandler<HTMLSelectElement> = (e) => {
         setFormState(prevState => ({ ...prevState, region: e.target.value }));
+        userRegion.update(e.target.value);
     }
 
     const handleInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
         setFormState(prevState => ({ ...prevState, name: e.target.value }));
     }
 
-    const { region, name } = formState;
-    const nameParts = name.split('#');
-    const summonerName = nameParts[0]?.trim() || '';
-    const tag = nameParts[1]?.trim() || '';
-    const namePath = tag ? encodeNameSearchInUrl(summonerName, tag) : summonerName;
+    const handleFormSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+        e.preventDefault();
+
+        const { region, name } = formState;
+        const nameParts = name.split('#');
+        const summonerName = nameParts[0]?.trim() || '';
+        const tag = nameParts[1]?.trim() || '';
+        const namePath = tag ? encodeNameSearchInUrl(summonerName, tag) : summonerName;
+
+        router.push(`/profile/${region}/${namePath}`);
+    }
 
     return (
         <form 
@@ -34,7 +45,7 @@ const ProfileSearch = ({ className = '' }: Props) => {
                 'w-[800px] min-w-[500px] h-16 rounded-full overflow-hidden bg-[#2F2F2F] flex gap-5 pl-8 pr-6 py-3 text-sm',
                 className
             )}
-            action={`/profile/${region}/${namePath}`}
+            onSubmit={handleFormSubmit}
         >
             <RegionSelect 
                 className='flex-[0_1_25%]'

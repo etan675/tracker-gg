@@ -1,3 +1,6 @@
+import { apiRegions } from "@/lib/constants";
+
+export type ApiRegion = keyof typeof apiRegions;
 
 export interface LeagueEntry {
     summonerId: string,
