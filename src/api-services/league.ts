@@ -4,7 +4,7 @@ import { LeagueSchema } from "./validation/schemas/league-schema";
 
 const getLeagueData = async (summonerId: string, region: ApiRegion): Promise<LeagueEntry[]|null> => {
     const res = await fetch(
-        `https://${apiRegions[region].SERVER_CODE}.api.riotgames.com/lol/v/v4/entries/by-summoner/${summonerId}`,
+        `https://${apiRegions[region].SERVER_CODE}.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerId}`,
         {
             method: "GET",
             headers: { "X-Riot-Token": process.env.API_KEY ?? '' }
