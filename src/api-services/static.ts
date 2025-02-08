@@ -15,7 +15,7 @@ const getQueuesJson = async () => {
     return await res.json();
 }
 
-const getQueueType = async (queueId: number): Promise<QueueType|undefined> => {
+const getQueueType = async (queueId: number): Promise<QueueType|null> => {
     const data = await getQueuesJson();
     const v = QueuesSchema.parse(data);
 
@@ -23,7 +23,7 @@ const getQueueType = async (queueId: number): Promise<QueueType|undefined> => {
         return type.queueId === queueId;
     })
 
-    return queueData;
+    return queueData || null;
 }
 
 const getSummonerSpellJson = async () => {
