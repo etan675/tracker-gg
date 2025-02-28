@@ -54,6 +54,11 @@ API_KEY=your-developer-api-key
 npm run dev
 ```
 
+- Run tests
+```bash
+npm run test
+```
+
 - For production:
 
 ```bash
