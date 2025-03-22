@@ -16,10 +16,7 @@ const TopBanner = ({ className = '' }: Props) => {
         className
     )}>
         <Link 
-          className={classNames(
-            'top-banner__header',
-            'flex items-center gap-2 h-full'
-          )}
+          className='flex items-center gap-2 h-full'
           href='/'
         >
             <Image className='rounded-md' src={logo} alt="app logo" width={40} height={40} priority />

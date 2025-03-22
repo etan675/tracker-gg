@@ -1,10 +1,4 @@
 .top-banner {
-    &__header {
-        &:active {
-            transform: translateY(1px);
-        }
-    }
-
     &__header-title {
         position: relative;
 
