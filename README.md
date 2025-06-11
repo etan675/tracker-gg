@@ -2,6 +2,8 @@
 
 A web app designed to track and display game stats for players, similar to OP.GG. Users can search profiles and view detailed statistics such as match history, in-game performance, rank stats, and more.
 
+https://trackergg.vercel.app/
+
 ## Features
 
 - **Player Search**: Search for players by their game ID, and region.
